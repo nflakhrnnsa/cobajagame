@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>JAGAME - Walking Tour</title>
+
+    <link
+        rel="stylesheet"
+        href="game.css">
+
+    <!-- Leaflet -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<main class="app">
+
+    <!-- Background -->
+
+    <div class="overlay"></div>
+
+    <!-- ========================================= -->
+    <!-- HEADER -->
+    <!-- ========================================= -->
+
+    <header class="header">
+
+        <button class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+        <div class="header-title">
+
+            Wisata Kotagede
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="progress-box">
+
+                🏆
+
+                <span id="progressText">
+
+                    0/25
+
+                </span>
+
+            </div>
+
+            <div class="coin-box">
+
+                <img
+                    src="assets/coin.png"
+                    alt="coin">
+
+                <span id="coinValue">
+
+                    0
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ========================================= -->
+    <!-- MAP -->
+    <!-- ========================================= -->
+
+    <section id="map"></section>
+
+    <!-- ========================================= -->
+    <!-- FLOATING BUTTON -->
+    <!-- ========================================= -->
+
+    <div class="floating-menu">
+
+        <button id="gpsBtn">
+
+            <i class="fa-solid fa-location-crosshairs"></i>
+
+        </button>
+
+        <button id="zoomInBtn">
+
+            <i class="fa-solid fa-plus"></i>
+
+        </button>
+
+        <button id="zoomOutBtn">
+
+            <i class="fa-solid fa-minus"></i>
+
+        </button>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- BOTTOM SHEET -->
+    <!-- ========================================= -->
+
+    <section class="bottom-sheet" id="bottomSheet">
+
+        <div class="sheet-bar"></div>
+
+        <!-- MODE 1 -->
+
+        <div
+            id="welcomePanel"
+            class="panel active">
+
+            <h2>
+
+                👋 Selamat Datang
+
+            </h2>
+
+            <p>
+
+                Datangi salah satu lokasi wisata
+                untuk memulai petualangan.
+
+            </p>
+
+        </div>
+
+        <!-- MODE 2 -->
+
+        <div
+            id="missionPanel"
+            class="panel">
+
+            <h2>
+
+                🎯 Misi Baru
+
+            </h2>
+
+            <h3 id="placeName">
+
+                Masjid Perak
+
+            </h3>
+
+            <p>
+
+    📏 Jarak :
+
+    <span id="distance">
+
+        -
+
+    </span>
+
+    meter
+
+</p>
+
+<p>
+
+    🚶 Estimasi :
+
+    <span id="estimateTime">
+
+        -
+
+    </span>
+
+</p>
+
+<p>
+
+    🏛 Kategori :
+
+    <span id="categoryText">
+
+        -
+
+    </span>
+
+</p>
+
+<p>
+
+    📌 Status :
+
+    <span id="statusText">
+
+        Belum dikunjungi
+
+    </span>
+
+</p>
+
+            <p>
+
+                Reward
+
+                <strong id="rewardCoin">
+
+                    20 Coin
+
+                </strong>
+
+            </p>
+
+            <button id="startMission">
+
+                Mulai Misi
+
+            </button>
+
+        </div>
+
+        <!-- MODE 3 -->
+
+        <div
+            id="quizPanel"
+            class="panel">
+
+            <div class="mission-type">
+
+                🏛 Heritage Quiz
+
+            </div>
+
+            <h2 id="question">
+
+                Apa bahan utama kerajinan Kotagede?
+
+            </h2>
+
+            <div class="answer-list">
+
+                <button class="answer">
+
+                    Kayu
+
+                </button>
+
+                <button class="answer">
+
+                    Perak
+
+                </button>
+
+                <button class="answer">
+
+                    Besi
+
+                </button>
+
+                <button class="answer">
+
+                    Aluminium
+
+                </button>
+
+            </div>
+
+            <button id="submitAnswer">
+
+                Jawab
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ========================================= -->
+    <!-- POPUP REWARD -->
+    <!-- ========================================= -->
+
+    <div
+        id="rewardPopup"
+        class="popup">
+
+        <div class="popup-content">
+
+            <div class="popup-icon">
+
+                🎉
+
+            </div>
+
+            <h2>
+
+                Misi Berhasil
+
+            </h2>
+
+            <p>
+
+                +20 Kotagede Coin
+
+            </p>
+
+            <button id="closePopup">
+
+                Lanjut
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- ACHIEVEMENT -->
+    <!-- ========================================= -->
+
+    <div
+        id="achievement"
+        class="achievement">
+
+        🏅 Explorer
+
+        <span>
+
+            5 Lokasi Berhasil Diselesaikan
+
+        </span>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- CHEST BONUS -->
+    <!-- ========================================= -->
+
+    <div
+        id="chestReward"
+        class="chest-popup">
+
+        🎁
+
+        <h2>
+
+            Bonus Treasure!
+
+        </h2>
+
+        <p>
+
+            Kamu mendapatkan
+
+            50 Coin
+
+        </p>
+
+    </div>
+
+</main>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+<script type="module" src="game.js"></script>
+
+</body>
+
+</html>

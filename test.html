@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TEST JAGAME</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+height:100%;
+}
+
+#map{
+height:100vh;
+width:100%;
+}
+
+.info{
+position:absolute;
+top:15px;
+left:15px;
+z-index:999;
+background:white;
+padding:10px 15px;
+border-radius:10px;
+font-family:Arial;
+box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+.info b{
+display:block;
+margin-bottom:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="info">
+<b>TEST ROUTING</b>
+Klik marker untuk membuat rute.
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+<script>
+
+const map=L.map("map").setView([-7.8285,110.3987],18);
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:20
+}
+).addTo(map);
+
+let userLocation=null;
+let userMarker=null;
+let routeControl=null;
+
+
+
+navigator.geolocation.watchPosition(
+
+function(pos){
+
+const lat=pos.coords.latitude;
+const lng=pos.coords.longitude;
+
+userLocation=[lat,lng];
+
+if(!userMarker){
+
+userMarker=L.marker(userLocation)
+.addTo(map)
+.bindPopup("Lokasi Saya");
+
+map.setView(userLocation,18);
+
+}else{
+
+userMarker.setLatLng(userLocation);
+
+}
+
+},
+
+function(err){
+
+alert("GPS gagal");
+
+},
+
+{
+enableHighAccuracy:true
+}
+
+);
+
+
+
+fetch("data/wisata.geojson")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+L.geoJSON(data,{
+
+pointToLayer:function(feature,latlng){
+
+return L.marker(latlng);
+
+},
+
+onEachFeature:function(feature,layer){
+
+layer.bindPopup(feature.properties.nama);
+
+layer.on("click",function(){
+
+buatRute(layer.getLatLng());
+
+});
+
+}
+
+}).addTo(map);
+
+});
+
+
+
+function buatRute(tujuan){
+
+if(!userLocation){
+
+alert("Menunggu GPS...");
+
+return;
+
+}
+
+if(routeControl){
+
+map.removeControl(routeControl);
+
+}
+
+routeControl=L.Routing.control({
+
+waypoints:[
+
+L.latLng(userLocation),
+
+L.latLng(tujuan)
+
+],
+
+router:L.Routing.osrmv1({
+
+serviceUrl:"https://router.project-osrm.org/route/v1"
+
+}),
+
+lineOptions:{
+
+styles:[
+
+{
+
+color:"#2196f3",
+
+weight:6
+
+}
+
+]
+
+},
+
+show:false,
+
+addWaypoints:false,
+
+draggableWaypoints:false,
+
+fitSelectedRoutes:true,
+
+createMarker:function(i,wp){
+
+if(i===0){
+
+return L.marker(wp.latLng)
+.bindPopup("Lokasi Saya");
+
+}
+
+return L.marker(wp.latLng)
+.bindPopup("Tujuan");
+
+}
+
+}).addTo(map);
+
+}
+
+</script>
+
+</body>
+</html>

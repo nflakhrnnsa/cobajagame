@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Tukar Poin - JAGAME</title>
+
+    <link rel="stylesheet" href="poin.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<main class="app">
+
+    <!-- Overlay -->
+
+    <div class="overlay"></div>
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <header class="header">
+
+       <button
+    class="back-btn"
+    type="button">
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <h1>Tukar Poin Hadiah</h1>
+
+        <img
+            src="assets/coin.png"
+            alt="Coin">
+
+    </header>
+
+    <!-- ========================= -->
+    <!-- COIN -->
+    <!-- ========================= -->
+
+    <section class="coin-banner">
+
+        <span>
+
+            Kotagede Coin :
+
+            <strong id="coinValue">
+
+                0
+
+            </strong>
+
+        </span>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- REWARD LIST -->
+    <!-- ========================= -->
+
+    <section class="reward-list">
+
+        <!-- Reward 1 -->
+
+        <article class="reward-card">
+
+    <img
+        src="assets/wajik.jpg"
+        alt="Wajik">
+
+    <div class="reward-info">
+
+        <h2>Wajik Khas Kotagede</h2>
+
+        <div class="reward-bottom">
+
+            <span class="price">
+
+                <img src="assets/coin.png">
+
+                100 Poin
+
+            </span>
+
+            <div class="action-area">
+
+                <button
+                    class="redeem-btn"
+                    data-id="1"
+                    data-name="Wajik Khas Kotagede"
+                    data-price="100">
+
+                    Tukar
+
+                </button>
+
+                <div class="qty-control hidden">
+
+                    <button class="minus">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+
+                    <span class="qty">
+
+                        1
+
+                    </span>
+
+                    <button class="plus">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</article>
+
+        <!-- Reward 2 -->
+
+        <article class="reward-card">
+
+    <img
+        src="assets/mainan.jpg"
+        alt="Mainan">
+
+    <div class="reward-info">
+
+        <h2>Mainan Tradisional</h2>
+
+        <div class="reward-bottom">
+
+            <span class="price">
+
+                <img src="assets/coin.png">
+
+                120 Poin
+
+            </span>
+
+            <div class="action-area">
+
+                <button
+                    class="redeem-btn"
+                    data-id="2"
+                    data-name="Mainan Tradisional"
+                    data-price="120">
+
+                    Tukar
+
+                </button>
+
+                <div class="qty-control hidden">
+
+                    <button class="minus">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+
+                    <span class="qty">
+
+                        1
+
+                    </span>
+
+                    <button class="plus">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</article>
+        <!-- Reward 3 -->
+
+        <article class="reward-card">
+
+    <img
+        src="assets/gantungan.jpg"
+        alt="Gantungan">
+
+    <div class="reward-info">
+
+        <h2>Gantungan Perak</h2>
+
+        <div class="reward-bottom">
+
+            <span class="price">
+
+                <img src="assets/coin.png">
+
+                150 Poin
+
+            </span>
+
+            <div class="action-area">
+
+                <button
+                    class="redeem-btn"
+                    data-id="3"
+                    data-name="Gantungan Perak"
+                    data-price="150">
+
+                    Tukar
+
+                </button>
+
+                <div class="qty-control hidden">
+
+                    <button class="minus">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+
+                    <span class="qty">
+
+                        1
+
+                    </span>
+
+                    <button class="plus">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</article>
+<!-- ========================= -->
+<!-- RINGKASAN PENUKARAN -->
+<!-- ========================= -->
+
+<section class="cart-section">
+
+    <h2>
+
+        Ringkasan Penukaran
+
+    </h2>
+
+    <div id="cartItems">
+
+        <p class="empty-cart">
+
+            Belum ada hadiah dipilih
+
+        </p>
+
+    </div>
+
+    <div class="cart-total">
+
+        <span>Total</span>
+
+        <span>
+
+            <img src="assets/coin.png">
+
+            <strong id="totalCoin">
+
+                0
+
+            </strong>
+
+        </span>
+
+    </div>
+
+    <button
+        id="checkoutBtn"
+        disabled>
+
+        Tukar Sekarang
+
+    </button>
+
+</section>
+<!-- ========================= -->
+<!-- VOUCHER -->
+<!-- ========================= -->
+
+<section class="voucher-section">
+
+    <div class="voucher-header">
+
+        <h2>
+
+            Voucher Saya
+
+        </h2>
+
+    </div>
+<div
+    id="voucherLoading"
+    class="hidden">
+
+    Memuat voucher...
+
+</div>
+    <div id="voucherList">
+
+        <p class="empty-voucher">
+
+            Belum ada voucher
+
+        </p>
+
+    </div>
+
+</section>
+    <!-- ================================= -->
+    <!-- POPUP -->
+    <!-- ================================= -->
+
+    <div class="popup" id="popup">
+
+        <div class="popup-box">
+
+            <div class="popup-icon">
+
+                🪙
+
+            </div>
+
+            <h2 id="popupTitle">
+
+                Tukar Hadiah
+
+            </h2>
+
+            <p id="popupText">
+
+                Apakah kamu yakin?
+
+            </p>
+
+            <div class="popup-button">
+
+                <button
+                    id="cancelBtn">
+
+                    Batal
+
+                </button>
+
+                <button
+                    id="confirmBtn">
+
+                    Tukar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+<!-- ========================= -->
+<!-- SUCCESS POPUP -->
+<!-- ========================= -->
+
+<div
+    class="popup"
+    id="successPopup">
+
+    <div class="popup-box">
+
+        <div class="popup-icon">
+
+            🎉
+
+        </div>
+
+        <h2>
+
+            Voucher Berhasil Dibuat
+
+        </h2>
+
+        <p id="voucherCode">
+
+            JGM-XXXXXX
+
+        </p>
+
+        <button
+            id="closeSuccessBtn">
+
+            Oke
+
+        </button>
+
+    </div>
+
+</div>
+</main>
+
+<script type="module" src="poin.js"></script>
+
+</body>
+
+</html>

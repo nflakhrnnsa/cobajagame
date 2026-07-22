@@ -1,0 +1,567 @@
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+}
+
+body{
+
+    font-family:
+    'Trebuchet MS',
+    sans-serif;
+
+    background:#111;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+
+    position:relative;
+
+    width:100%;
+    max-width:430px;
+
+    height:100vh;
+
+    background:
+    url("assets/background.png")
+    center center
+    no-repeat;
+
+    background-size:cover;
+
+    overflow:hidden;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.08),
+        rgba(0,0,0,.15)
+    );
+
+    z-index:1;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-area{
+
+    position:absolute;
+
+    top:50px;
+
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+
+    z-index:5;
+}
+
+.logo{
+
+    width:75%;
+
+    max-width:280px;
+
+    object-fit:contain;
+
+    filter:
+    drop-shadow(
+        0 3px 6px rgba(0,0,0,.4)
+    );
+}
+
+/* =========================
+   START AREA
+========================= */
+
+.start-area{
+
+    position:absolute;
+
+    bottom:195px;
+
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+
+    z-index:10;
+}
+
+/* =========================
+   START BUTTON
+========================= */
+
+.start-btn{
+
+    position:relative;
+
+    width:260px;
+    height:58px;
+border-radius:12px;
+    border:none;
+
+    cursor:pointer;
+
+    background:
+linear-gradient(
+    to bottom,
+    rgba(217,127,46,0.85),
+    rgba(166,68,20,0.85)
+);
+
+    color:white;
+
+    font-size:18px;
+    font-weight:700;
+
+    text-shadow:
+        1px 1px 2px rgba(0,0,0,.4);
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.35);
+
+    transition:.2s;
+
+    /* bentuk panah */
+    clip-path:polygon(
+        0 0,
+        88% 0,
+        100% 50%,
+        88% 100%,
+        0 100%
+    );
+}
+
+.start-btn:hover{
+    transform:translateY(-2px);
+}
+/* =========================
+   MENU
+========================= */
+
+.menu-area{
+
+    position:absolute;
+
+    bottom:75px;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:16px;
+
+    z-index:10;
+}
+
+.menu-btn{
+
+     width:115px;
+    height:88px;
+
+    border:none;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+        rgba(202,162,78,.65),
+        rgba(142,108,40,.65)
+    );
+
+    padding:3px;
+
+    border-radius:12px;
+
+    position:relative;
+
+    backdrop-filter:blur(2px);
+}
+.menu-btn img{
+
+    width:45px;
+    height:45px;
+
+    object-fit:contain;
+
+    margin-bottom:6px;
+
+    position:relative;
+
+    z-index:5;
+}
+
+.menu-btn{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.menu-btn span{
+
+    position:relative;
+
+    z-index:5;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    text-shadow:
+        1px 1px 2px rgba(0,0,0,.4);
+}
+.menu-btn{
+
+    position:relative;
+}
+
+.menu-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:3px;
+
+    background:
+    linear-gradient(
+        #1f5697,
+        #10355f
+    );
+
+    border-radius:9px;
+
+    z-index:1;
+}
+.menu-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:3px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    z-index:2;
+
+    pointer-events:none;
+}
+.menu-btn img,
+.menu-btn span{
+
+    position:relative;
+
+    z-index:5;
+}
+
+.menu-btn{
+
+    flex-direction:column;
+}
+
+/* =========================
+   FOOTER COIN
+========================= */
+
+.coin-footer{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+    right:0;
+
+    height:42px;
+
+    display:flex;
+
+    justify-content:center;  /* tengah horizontal */
+    align-items:center;      /* tengah vertikal */
+
+    gap:10px;
+
+    background:
+    rgba(70,35,15,.72);
+
+    backdrop-filter:blur(3px);
+
+    z-index:10;
+}
+
+.coin-footer img{
+
+    width:24px;
+    height:24px;
+}
+
+.coin-footer span{
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+}
+
+.coin-footer strong{
+
+    color:#ffd75e;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width:768px){
+
+    .app{
+
+        max-width:500px;
+    }
+
+    .logo{
+
+        max-width:320px;
+    }
+
+    .start-btn{
+
+        width:280px;
+    }
+
+    .menu-btn{
+
+        width:120px;
+        height:108px;
+    }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width:1024px){
+
+    .app{
+
+        width:430px;
+        height:900px;
+
+        border-radius:30px;
+
+        overflow:hidden;
+
+        box-shadow:
+        0 0 30px rgba(0,0,0,.45);
+    }
+}
+
+
+.start-btn,
+.menu-btn{
+
+    transition:
+    transform .15s ease,
+    filter .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.button-pressed{
+
+    transform:scale(.96);
+
+}
+
+.button-hover{
+
+    transform:translateY(-3px);
+
+    filter:brightness(1.08);
+
+    box-shadow:
+    0 8px 18px rgba(0,0,0,.35);
+
+}
+
+.coin-pop{
+
+    animation:coinPop .35s ease;
+
+}
+
+@keyframes coinPop{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    40%{
+
+        transform:scale(1.35);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+/* ==========================================
+            INTRO ANIMATION
+========================================== */
+
+.logo-area,
+.start-area,
+.menu-area,
+.coin-footer{
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+}
+
+/* Logo */
+
+.logo-show{
+
+    animation:logoShow .8s ease forwards;
+
+}
+
+/* Start */
+
+.start-show{
+
+    animation:slideShow .6s ease forwards;
+
+}
+
+/* Menu */
+
+.menu-show{
+
+    animation:slideShow .6s ease forwards;
+
+}
+
+/* Footer */
+
+.footer-show{
+
+    animation:footerShow .6s ease forwards;
+
+}
+
+@keyframes logoShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(-25px)
+        scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0)
+        scale(1);
+
+    }
+
+}
+
+@keyframes slideShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+@keyframes footerShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
