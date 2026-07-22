@@ -38,7 +38,7 @@ body{
     width:100%;
     max-width:430px;
 
-    height:100vh;
+    height:100dvh;
 
     background:
     url("assets/background.png")
