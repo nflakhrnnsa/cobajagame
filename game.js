@@ -265,7 +265,7 @@ window.addEventListener(
 
         // Map
         initializeMap();
-        loadGeoJSON();
+        await loadGeoJSON();
 
         APP.map.on(
 
