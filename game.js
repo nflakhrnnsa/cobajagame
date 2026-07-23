@@ -1,5 +1,3 @@
-
-
 import {
     createPlayer,
     saveCoin,
@@ -107,6 +105,8 @@ const APP = {
     accuracyCircle: null,
 
     routingControl: null,
+
+    isRouting:false,
 
     userLocation: null,
 
@@ -1227,6 +1227,9 @@ estimateTime.textContent =
 ==========================================================*/
 
 async function showRoute(destination){
+ if(APP.isRouting) return;
+
+    APP.isRouting = true;
 
     if(!APP.userLocation){
         alert("Lokasi Anda belum terdeteksi.");
@@ -1266,6 +1269,8 @@ async function showRoute(destination){
 
         const data = await response.json();
 
+        APP.isRouting = false;
+
         APP.routingControl = L.geoJSON(data,{
             style:{
                 color:"#2E86FF",
@@ -1276,6 +1281,7 @@ async function showRoute(destination){
 
     }
     catch(err){
+        APP.isRouting = false;
         console.error(err);
         alert("Gagal mengambil rute.");
     }
