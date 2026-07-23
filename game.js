@@ -20,7 +20,7 @@ const CONFIG = {
 
     TOTAL_LOCATION: 25,
 
-    MISSION_RADIUS: 500,
+    MISSION_RADIUS: 20,
 
     MAP_ZOOM: 18,
 
